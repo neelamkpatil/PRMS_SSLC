@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import java.util.logging.*;
+import sg.edu.nus.iss.phoenix.audittrail.dao.AuditTrailDao;
 
 import sg.edu.nus.iss.phoenix.user.dao.RoleDao;
 import sg.edu.nus.iss.phoenix.user.dao.UserDao;
@@ -21,6 +22,7 @@ public class AuthenticateService {
     DAOFactoryImpl factory;
     UserDao udao;
     RoleDao rdao;
+    AuditTrailDao audao;
 
     public AuthenticateService() {
         super();
@@ -28,6 +30,8 @@ public class AuthenticateService {
         factory = new DAOFactoryImpl();
         udao = factory.getUserDAO();
         rdao = factory.getRoleDAO();
+        audao = factory.getAuditTrailDAO();
+
 
     }
 
@@ -45,8 +49,16 @@ public class AuthenticateService {
             logger.log(Level.SEVERE, "user searchMatching", ex);
 
         }
-        if (null == found) {
-            return (null);
+        try {
+            if (null == found) {
+                audao.auditLogin(toAuth.getId(), false);
+                return (null);
+            } else {
+                audao.auditLogin(found.getId(), true);
+            }
+            
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, "login audit error", ex);
         }
 
         //Populate the roles
@@ -65,18 +77,4 @@ public class AuthenticateService {
         return (found);
     }
 
-//    public User evaluateAccessPreviledge(User user) {
-//        try {
-//            Role role = rdao.getObject(user.getRoles().get(0).getRole());
-//            //user.setAccessPrivilege(role.getAccessPrivilege());
-//            return user;
-//        } catch (NotFoundException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (SQLException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        return user;
-//    }
 }

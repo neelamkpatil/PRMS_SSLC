@@ -4,6 +4,7 @@
  */
 package sg.edu.nus.iss.phoenix.core.dao;
 
+import sg.edu.nus.iss.phoenix.audittrail.dao.AuditTrailDao;
 import sg.edu.nus.iss.phoenix.user.dao.RoleDao;
 import sg.edu.nus.iss.phoenix.user.dao.UserDao;
 import sg.edu.nus.iss.phoenix.radioprogram.dao.ProgramDAO;
@@ -22,5 +23,7 @@ public interface DAOFactory {
     RoleDao getRoleDAO();
 
     UserDao getUserDAO();
+    
+    AuditTrailDao getAuditTrailDAO();
 
 }
