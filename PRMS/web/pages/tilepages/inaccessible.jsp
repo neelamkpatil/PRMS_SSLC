@@ -9,9 +9,8 @@
     </head>
 <body>
     <h2>
-        <fmt:message key="error.incorrectLogin" />
+        <fmt:message key="error.noPrivilege" />
     </h2>
 
-    <h3><fmt:message key="error.password.mismatch" /></h3>
-    
+    <h3><fmt:message key="error.noAccess" /></h3>
 </body>
