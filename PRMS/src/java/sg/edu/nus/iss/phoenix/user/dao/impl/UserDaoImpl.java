@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sg.edu.nus.iss.phoenix.authenticate.service.PasswordService;
 
 import sg.edu.nus.iss.phoenix.user.dao.UserDao;
 import sg.edu.nus.iss.phoenix.user.entity.Role;
@@ -147,7 +148,10 @@ public class UserDaoImpl implements UserDao {
             }
 
             stmt.setString(1, valueObject.getId());
-            stmt.setString(2, valueObject.getPassword());
+            String pwd=valueObject.getPassword();
+            PasswordService pws=new PasswordService();
+            String hashedPwd=pws.encrypt(pwd);
+            stmt.setString(2,hashedPwd);
             stmt.setString(3, valueObject.getName());
             stmt.setString(4, userRole);
             //stmt.setString(4, valueObject.getRoles().get(0).getRole());
