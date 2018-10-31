@@ -33,11 +33,10 @@
             var publickey=$('#publickey').val();
             //var publickey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJmwSmifYrfvWc7U7LntEWU9z7Puu8V96/NxkPaG426YpTkg9c3zgBioRFrrl3I7q+g5qmN88CkEM4FQhKatwr7uAeOSF9TGhp+6+AOFHDF3ja043HTse03YG/Mmf9uUnPtsQLiiubeRVpZGYgJsmtE+4Uisb0amFkpZ1YWafOkQIDAQAB"
             var encrypt=new JSEncrypt();
-            alert(3);
             encrypt.setPublicKey(publickey);
-            alert(pwd);
+            //alert(pwd);
             var encrypted = encrypt.encrypt(pwd);
-            alert(encrypted);
+            //alert(encrypted);
             //$('#haha').val()="hellohahah";
             $('#encrypted').val(encrypted);
             //alert($('#encrypted').val());
