@@ -32,6 +32,7 @@ public class LoginCmd implements Perform {
     //  @Override
     public String perform(String path, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         AuthenticateDelegate ad = new AuthenticateDelegate();
+        int timeout=20;
         User user = new User();
         String userId=req.getParameter("id");
         String userPwd_encrypted=req.getParameter("encrypted");
@@ -76,6 +77,9 @@ public class LoginCmd implements Perform {
                 session.invalidate();
                 session=req.getSession(true);
                 req.getSession().setAttribute("user", user);
+                session.setMaxInactiveInterval(timeout);
+                //resp.setHeader("Refresh", timeout + "; URL=/pages/login.jsp");
+                
                 return "/pages/home.jsp";
             } else {
                 String errorMessage = "Error: Unrecognized Username or Password<br>Login attempts remaining: "+(3-(loginAttempts));

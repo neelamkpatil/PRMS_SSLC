@@ -5,6 +5,7 @@
         <servlet-name>frontController</servlet-name>
         <url-pattern>/nocturne/*</url-pattern>
     </servlet-mapping>
+    
     <welcome-file-list>
         <welcome-file>/pages/home.jsp</welcome-file>
     </welcome-file-list>
@@ -26,4 +27,8 @@
         <servlet-class>at.nocturne.core.NocturneApplicationController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+     <session-config>
+        <session-timeout>2</session-timeout> <!--value is in mintes-->
+    </session-config>
+
 </web-app>
