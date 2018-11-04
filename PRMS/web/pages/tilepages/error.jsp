@@ -13,5 +13,6 @@
     </h2>
 
     <h3><fmt:message key="error.password.mismatch" /></h3>
+    <h3>${errorMessage}</h3>
     
 </body>

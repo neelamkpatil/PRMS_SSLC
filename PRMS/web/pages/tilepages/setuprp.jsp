@@ -23,13 +23,13 @@
                     <td><fmt:message key="label.crudrp.name" /></td>
                     <td><c:if test="${param['insert'] == 'true'}">
                             <input type="text" name="name" value="${param['name']}" size=15
-                                   maxlength=20>
+                                   maxlength=15>
                             <span class="error">${messageName.enterrp}</span>
                             <input type="hidden" name="insert" value="true" />
                         </c:if> 
                         <c:if test="${param['insert']=='false'}">
                             <input type="text" name="name" value="${param['name']}" size=15
-                                   maxlength=20 readonly="readonly">
+                                   maxlength=15 readonly="readonly">
                             <input type="hidden" name="insert" value="false" />
                         </c:if>
                         <c:if test="${programExist == 'false'}">

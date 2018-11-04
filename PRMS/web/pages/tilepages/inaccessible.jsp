@@ -7,10 +7,14 @@
         <c:set var="t" value="true" />
         <title><fmt:message key="title.error" /></title>
     </head>
-<body>
-    <h2>
-        <fmt:message key="error.noPrivilege" />
-    </h2>
+    <body>
+        <h2>Inaccessible</h2>
 
-    <h3><fmt:message key="error.noAccess" /></h3>
-</body>
+        <h3><c:if test="${msg =='noPrivilege'}">
+                <fmt:message key="error.noPrivilege" />
+            </c:if>
+            <c:if test="${msg =='noAccess'}">
+                <fmt:message key="error.noAccess" />
+            </c:if>
+        </h3>
+    </body>

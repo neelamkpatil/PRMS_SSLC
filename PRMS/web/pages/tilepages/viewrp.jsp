@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html>
     <head>
         <link href="<c:url value='/css/main.css'/>" rel="stylesheet" type="text/css"/>
@@ -19,9 +20,9 @@
             </tr>
             <c:forEach var="crudrp" items="${rps}" varStatus="status">
                 <tr class="${status.index%2==0?'even':'odd'}">
-                    <td class="nowrap">${crudrp.name}</td>
-                    <td class="nowrap">${crudrp.description}</td>
-                    <td class="nowrap">${crudrp.typicalDuration}</td>
+                    <td class="nowrap">${fn:escapeXml(crudrp.name)}</td>
+                    <td class="nowrap">${fn:escapeXml(crudrp.description)}</td>
+                    <td class="nowrap">${fn:escapeXml(crudrp.typicalDuration)}</td>
                 </tr>
             </c:forEach>
         </table>

@@ -50,32 +50,31 @@ public class EnterProgramDetailsCmd implements Perform {
         RadioProgram rp = new RadioProgram();
         String rpname = req.getParameter("name");
         String rpDescription = req.getParameter("description");
-        if(!rpname.matches("^(\\w+ ?)*$")) {
-        messageName.put("enterrp", "Please enter alphanumeric characters only");
-         error = true;
-           }else{
-        if(rpname.length()>20){
-                messageName.put("enterrp", "Max limit is 20");  
-                error = true;
-            }else{
-            rp.setName(req.getParameter("name"));
-            } 
-        }
-        if(rpDescription.length()>45){
-            messageDescription.put("enterrp", "Max limit is 45"); 
+        if (!rpname.matches("^(\\w+ ?)*$")) {
+            messageName.put("enterrp", "* Please enter alphanumeric characters only");
             error = true;
-        }else{
+        } else {
+            if (rpname.length() > 15) {
+                messageName.put("enterrp", "* Max limit is 15");
+                error = true;
+            } else {
+                rp.setName(req.getParameter("name"));
+            }
+        }
+        if (rpDescription.length() > 45) {
+            messageDescription.put("enterrp", "* Max limit is 45");
+            error = true;
+        } else {
             rp.setDescription(req.getParameter("description"));
         }
         String dur = req.getParameter("typicalDuration");
-        System.out.println(rp.toString());
+//        System.out.println(rp.toString());
         Time t;
         try {
             t = Time.valueOf(dur);
             rp.setTypicalDuration(t);
         } catch (Exception e) {
             error = true;
-//            isDurationVaild = "* Please input a valid duration!";
             req.setAttribute("isDurationVaild", "false");
         }
         String ins = (String) req.getParameter("insert");
@@ -106,19 +105,17 @@ public class EnterProgramDetailsCmd implements Perform {
             } else {
                 System.out.println(error);
             }
-//        req.setAttribute("programExist", programExist);
-//        req.setAttribute("isDescVaild", isDescVaild);
-//        req.setAttribute("isDurationVaild", "false");
+
             return "/pages/setuprp.jsp";
-            
+
         } catch (SQLException ex) {
-            Logger.getLogger(EnterProgramDetailsCmd.class.getName()).log(Level.SEVERE, 
+            Logger.getLogger(EnterProgramDetailsCmd.class.getName()).log(Level.SEVERE,
                     "Maintain program audit error", ex);
         }
         return "/pages/setuprp.jsp";
-}
+    }
 
-private User getCurrentUser(HttpServletRequest req) {
+    private User getCurrentUser(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
         User user = (User) session.getAttribute("user");
         return user;

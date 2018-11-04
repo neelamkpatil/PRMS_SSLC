@@ -35,7 +35,7 @@ public class AuditTrailDaoImpl implements AuditTrailDao {
                 stmt.setString(2, userId);
             }
 
-            System.out.println(stmt.toString());
+//            System.out.println(stmt.toString());
             int rowcount = databaseUpdate(stmt);
             if (rowcount != 1) {
                 throw new SQLException("Add Login Aduit Trail Error when updating DB!");
@@ -61,7 +61,7 @@ public class AuditTrailDaoImpl implements AuditTrailDao {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, userId);
 
-            System.out.println(stmt.toString());
+//            System.out.println(stmt.toString());
             int rowcount = databaseUpdate(stmt);
             if (rowcount != 1) {
                 throw new SQLException("Add Logout Aduit Trail Error when updating DB!");
@@ -95,7 +95,7 @@ public class AuditTrailDaoImpl implements AuditTrailDao {
                 stmt.setString(3, "no");
             }
 
-            System.out.println(stmt.toString());
+//            System.out.println(stmt.toString());
             int rowcount = databaseUpdate(stmt);
             if (rowcount != 1) {
                 throw new SQLException("Add" + operation + "Aduit Trail Error when updating DB!");

@@ -24,10 +24,13 @@ public class Inaccessible implements Perform {
      public String perform(String path, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         AuthenticateDelegate ad = new AuthenticateDelegate();
        User user=(User) req.getSession().getAttribute("user");
+       
+       
         if (null != user) {
-            return "/pages/home.jsp";
+            req.setAttribute("msg", "noPrivilege");
         } else {
-            return "/pages/inaccessible.jsp";
+            req.setAttribute("msg", "noAccess");
         }
+        return "/pages/inaccessible.jsp";
     }
 }
