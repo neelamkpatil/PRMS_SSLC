@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html>
     <head>
         <link href="<c:url value='/css/main.css'/>" rel="stylesheet" type="text/css"/>
@@ -28,20 +29,20 @@
             </tr>
             <c:forEach var="crudrp" items="${rps}" varStatus="status">
                 <tr class="${status.index%2==0?'even':'odd'}">
-                    <td class="nowrap">${crudrp.name}</td>
-                    <td class="nowrap">${crudrp.description}</td>
-                    <td class="nowrap">${crudrp.typicalDuration}</td>
+                    <td class="nowrap">${fn:escapeXml(crudrp.name)}</td>
+                    <td class="nowrap">${fn:escapeXml(crudrp.description)}</td>
+                    <td class="nowrap">${fn:escapeXml(crudrp.typicalDuration)}</td>
                     <td class="nowrap">
                         <c:url var="updurl" scope="page" value="/nocturne/addeditrp">
-                            <c:param name="name" value="${crudrp.name}"/>
-                            <c:param name="description" value="${crudrp.description}"/>
-                            <c:param name="typicalDuration" value="${crudrp.typicalDuration}"/>
+                            <c:param name="name" value="${fn:escapeXml(crudrp.name)}"/>
+                            <c:param name="description" value="${fn:escapeXml(crudrp.description)}"/>
+                            <c:param name="typicalDuration" value="${fn:escapeXml(crudrp.typicalDuration)}"/>
                             <c:param name="insert" value="false"/>
                         </c:url>
                         <a href="${updurl}"><fmt:message key="label.crudrp.edit"/></a>
                         &nbsp;&nbsp;&nbsp;
                         <c:url var="delurl" scope="page" value="/nocturne/deleterp">
-                            <c:param name="name" value="${crudrp.name}"/>
+                            <c:param name="name" value="${fn:escapeXml(crudrp.name)}"/>
                         </c:url>
                         <a href="${delurl}"><fmt:message key="label.crudrp.delete"/></a>
                     </td>

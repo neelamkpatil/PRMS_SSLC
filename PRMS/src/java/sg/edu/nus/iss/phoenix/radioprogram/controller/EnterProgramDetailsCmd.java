@@ -10,7 +10,9 @@ import at.nocturne.api.Perform;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -40,10 +42,31 @@ public class EnterProgramDetailsCmd implements Perform {
         String programExist = "";
         String isDescVaild = "";
         String isDurationVaild = "";
+        Map<String, String> messageName = new HashMap<String, String>();
+        Map<String, String> messageDescription = new HashMap<String, String>();
+        req.setAttribute("messageName", messageName);
+        req.setAttribute("messageDescription", messageDescription);
         ProgramDelegate del = new ProgramDelegate();
         RadioProgram rp = new RadioProgram();
-        rp.setName(req.getParameter("name"));
-        rp.setDescription(req.getParameter("description"));
+        String rpname = req.getParameter("name");
+        String rpDescription = req.getParameter("description");
+        if(!rpname.matches("^(\\w+ ?)*$")) {
+        messageName.put("enterrp", "Please enter alphanumeric characters only");
+         error = true;
+           }else{
+        if(rpname.length()>20){
+                messageName.put("enterrp", "Max limit is 20");  
+                error = true;
+            }else{
+            rp.setName(req.getParameter("name"));
+            } 
+        }
+        if(rpDescription.length()>45){
+            messageDescription.put("enterrp", "Max limit is 45"); 
+            error = true;
+        }else{
+            rp.setDescription(req.getParameter("description"));
+        }
         String dur = req.getParameter("typicalDuration");
         System.out.println(rp.toString());
         Time t;

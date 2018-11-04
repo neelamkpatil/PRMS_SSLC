@@ -7,6 +7,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html>
     <head>
         <fmt:setBundle basename="ApplicationResources" />
@@ -78,7 +79,7 @@
             <table >
                 <tr>
                     <td><fmt:message key="fieldLabel.username" /></td>
-                    <td><input type="text" name="id" id="id" value="${param['name']}"
+                    <td><input type="text" name="id" id="id" value="${fn:escapeXml(param['name'])}"
                                size=15 maxlength=20></td>
                 </tr>
                 <tr>
@@ -86,7 +87,7 @@
                     <%--<td><input type="password" name="password"--%>
                     <%--value="${param['name']}" size=15 maxlength=20></td>--%>
                     <td><input type="password" name="password" id="password"
-                               value="${param['password']}" size=15 maxlength=20></td>
+                               value="${fn:escapeXml(param['password'])}" size=15 maxlength=20></td>
                 </tr>
                 <tr >
                     <td colspan="2" align="center"><input type="submit" name="submit" value="Submit" onclick="Formsubmit()"> &nbsp;&nbsp;&nbsp;&nbsp;
