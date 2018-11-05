@@ -27,8 +27,6 @@
         <servlet-class>at.nocturne.core.NocturneApplicationController</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-     <session-config>
-        <session-timeout>2</session-timeout> <!--value is in mintes-->
-    </session-config>
+
 
 </web-app>

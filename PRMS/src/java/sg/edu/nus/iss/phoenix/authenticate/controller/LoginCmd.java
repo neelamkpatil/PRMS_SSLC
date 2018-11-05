@@ -28,7 +28,7 @@ public class LoginCmd implements Perform {
 //    @Override
     public String perform(String path, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         AuthenticateDelegate ad = new AuthenticateDelegate();
-        int timeout = 120;
+        int timeout = 600;
         User user = new User();
         String userId = req.getParameter("id");
         String userPwd_encrypted = req.getParameter("encrypted");

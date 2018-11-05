@@ -26,27 +26,4 @@
         }
     %>     
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        var lastActiveTime = new Date().getTime();
-        $(document).ready(function () {
-            $('body').bind('click mousemove keypress scroll resize', function () {
-                lastActiveTime = new Date().getTime();
-            });
-            setInterval(checkIdleTime, 30000); // 30 sec
-        });
-
-        function checkIdleTime() {
-            var diff = new Date().getTime() - lastActiveTime;
-            if (diff > 1200000) {//20 min of inactivity
-                window.location.href = "/logout?msg=onTimeOut"
-            } else {
-                $.ajax({url: '/refreshSession', error: function (data, status, xhr) {
-                        alert("cannot refresh session on server: " + xhr);
-                        window.location.reload();
-                    }
-                });
-            }
-        }
-    </script>
 </body>
